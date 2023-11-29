@@ -3,6 +3,7 @@ module EffortLoggerLogin {
 	requires javafx.fxml;
 	requires javafx.graphics;
 	requires javafx.base;
+	requires jasypt;
 	
-	opens effortLoggerLogin to javafx.graphics, javafx.fxml;
+	opens effortLogger_V2 to javafx.graphics, javafx.fxml;
 }

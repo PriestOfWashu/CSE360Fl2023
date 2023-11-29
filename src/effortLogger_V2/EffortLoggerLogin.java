@@ -1,5 +1,6 @@
-package effortLoggerLogin;
+package effortLogger_V2;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -16,9 +17,11 @@ public class EffortLoggerLogin extends Application {
     
     // create two global variables to allow program to remotely access specific
     // methods or data.
-    private static String UsrToken;
+    static String UsrToken;
     private static Stage Login;
-    
+    public static File tmpFile;
+    public static boolean mgr;
+    public static String masterDir;
     public void start(Stage primaryStage) {
     	// Create an FXML handler for the created scene.
         FXMLLoader login = new FXMLLoader();
@@ -38,7 +41,8 @@ public class EffortLoggerLogin extends Application {
         } catch(IOException e) {
         	e.printStackTrace();
         }
-        
+        // set master directory
+        masterDir = System.getProperty("user.dir");
     }
     /*
      * Sets the Global User Token for other modules to use.

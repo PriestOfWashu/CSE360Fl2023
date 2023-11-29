@@ -1,4 +1,4 @@
-package defectLoggingScreen;
+package effortLogger_V2;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -15,12 +15,9 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
  
-public class defectLoggingScreen extends Application {
-    public static void main(String[] args) {
-        launch(args);
-    }
+public class defectLoggingScreen{
     
-    public void start(Stage primaryStage) {
+    public static void start(Stage primaryStage) {
         primaryStage.setTitle("Employee/Manager Defect Logging Screen");
         
         TextField priority = new TextField();
@@ -89,6 +86,20 @@ public class defectLoggingScreen extends Application {
         	}
         });
         
+        // Switch to Defect Logger
+        Button SceneSwitch = new Button("Effort Logger");
+        SceneSwitch.setOnAction(new EventHandler<ActionEvent>() {
+				@Override public void handle(ActionEvent e) {
+					primaryStage.close();
+					if(EffortLoggerLogin.mgr) {
+						ManagerEffortLogger.start(primaryStage);
+					} else {
+						EmployeeEffortLogger.start(primaryStage);
+					}
+				}
+			});
+        SceneSwitch.setTranslateY(225);
+        SceneSwitch.setTranslateX(20);
         
         StackPane root = new StackPane();
         root.getChildren().add(priority);
@@ -96,8 +107,11 @@ public class defectLoggingScreen extends Application {
         root.getChildren().add(description);
         root.getChildren().add(btn);
         root.getChildren().add(questionMark);
+        root.getChildren().add(SceneSwitch);
         Scene test = new Scene(root, 800, 500);
         test.setFill(Color.RED);
+        
+        
         primaryStage.setScene(test);
         //primaryStage.setScene(new Scene (root, 1000, 500)); 
         primaryStage.show();

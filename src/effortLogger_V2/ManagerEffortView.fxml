@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ManagerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="effortLogger_V2.ManagerController">
    <children>
       <Label fx:id="titleLabel1" layoutX="14.0" layoutY="6.0" text="Effort Logger">
          <font>
@@ -18,5 +17,8 @@
       <ChoiceBox fx:id="recentChoiceBox1" layoutX="20.0" layoutY="60.0" prefHeight="25.0" prefWidth="199.0" />
       <TextArea fx:id="displayedInfo1" layoutX="249.0" layoutY="60.0" prefHeight="275.0" prefWidth="317.0" />
       <Button fx:id="employeeEffort1" layoutX="350.0" layoutY="347.0" mnemonicParsing="false" onAction="#getEmployeeEffort" prefHeight="27.0" prefWidth="115.0" text="Employee Effort" />
+      <Label fx:id="UID" layoutX="538.0" layoutY="25.0" text="Label" />
+      <Button fx:id="SwitchView" layoutX="40.0" layoutY="309.0" mnemonicParsing="false" onAction="#EffortSwitchHandle" prefHeight="51.0" prefWidth="65.0" text="Effort Logger" wrapText="true" />
+      <Button fx:id="DefectSwitch" layoutX="167.0" layoutY="311.0" mnemonicParsing="false" onAction="#DefectSwitchHandle" prefHeight="51.0" prefWidth="65.0" text="Defect Logger" wrapText="true" />
    </children>
 </AnchorPane>

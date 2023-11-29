@@ -1,8 +1,13 @@
-package effortLoggerLogin;
+package effortLogger_V2;
+
+import java.io.IOException;
+import java.net.URL;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -22,7 +27,8 @@ import javafx.geometry.Pos;
 
  
 
-public class EmployeeEffortLogger{
+public class ManagerEffortLogger {
+	
     private static ComboBox<String> createComboBox(double boxWidth, double boxHeight) {
         ComboBox<String> comboBox = new ComboBox<>();
         comboBox.setPrefSize(boxWidth, boxHeight);
@@ -30,14 +36,14 @@ public class EmployeeEffortLogger{
     }
 
     public static void start(Stage primaryStage) {
-        primaryStage.setTitle("Employee Effort Logger");
+        primaryStage.setTitle("Manager Effort Logger");
 
         // BorderPane as the primary container
         BorderPane borderPane = new BorderPane();
         borderPane.setPadding(new Insets(30));
 
         // Title Label
-        Label titleLabel = new Label("Employee Effort Logger");
+        Label titleLabel = new Label("Manager Effort Logger");
         titleLabel.setFont(new Font("Arial", 24));
         titleLabel.setPadding(new Insets(0, 0, 50, 0)); // 50 units of space below the title
         BorderPane.setAlignment(titleLabel, Pos.CENTER); // Center the title
@@ -111,6 +117,34 @@ public class EmployeeEffortLogger{
         bottomBox.setAlignment(Pos.CENTER);
         borderPane.setBottom(bottomBox);
 
+        // Switch to Defect Logger
+        VBox Navi;
+        Button SceneSwitch = new Button("Defect Logger");
+        SceneSwitch.setOnAction(new EventHandler<ActionEvent>() {
+				@Override public void handle(ActionEvent e) {
+					primaryStage.close();
+					defectLoggingScreen.start(primaryStage);
+				}
+			});
+        Button EffortViewer = new Button("Effort Viewer");
+        EffortViewer.setOnAction(new EventHandler<ActionEvent>() {
+        	@Override public void handle(ActionEvent e) {
+        		primaryStage.close();
+        		FXMLLoader viewer = new FXMLLoader();
+        		URL xmlURL = getClass().getResource("ManagerEffortView.fxml");
+        		viewer.setLocation(xmlURL);
+        		try {
+        			Parent root = viewer.load();
+        			primaryStage.setScene(new Scene(root));
+        			primaryStage.show();
+        		} catch(IOException e1) {
+        			e1.printStackTrace();
+        		}
+        	}
+        });
+        Navi = new VBox(SceneSwitch, EffortViewer);
+        BorderPane.setAlignment(Navi, Pos.BOTTOM_CENTER);
+        borderPane.setLeft(Navi);
         Scene scene = new Scene(borderPane, 800, 700);
         primaryStage.setScene(scene);
         primaryStage.show();
