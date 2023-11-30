@@ -70,6 +70,7 @@ public class EmployeeController {
 		return data; //returns the selected sprint details
 	}
 	
+	// switches to the effort logging screen
 	@FXML
 	private void EffortSwitchHandle() {
 		Stage primaryStage = (Stage) SwitchView.getScene().getWindow();
@@ -77,6 +78,7 @@ public class EmployeeController {
 		EmployeeEffortLogger.start(primaryStage);
 	}
 	
+	// switch views to the defect logging screen
 	@FXML
 	private void DefectSwitchHandle() {
 		Stage primaryStage = (Stage) DefectSwitch.getScene().getWindow();

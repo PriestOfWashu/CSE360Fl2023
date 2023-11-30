@@ -79,6 +79,7 @@ public class ManagerController{
 		return employeeLogInfo;
 	}
 	
+	// switch view to the effort logging screen
 	@FXML
 	private void EffortSwitchHandle() {
 		Stage primaryStage = (Stage) SwitchView.getScene().getWindow();
@@ -86,6 +87,7 @@ public class ManagerController{
 		ManagerEffortLogger.start(primaryStage);
 	}
 	
+	// switch view to the defect logging screen
 	@FXML
 	private void DefectSwitchHandle() {
 		Stage primaryStage = (Stage) DefectSwitch.getScene().getWindow();
