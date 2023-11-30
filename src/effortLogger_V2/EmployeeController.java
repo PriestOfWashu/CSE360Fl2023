@@ -1,3 +1,11 @@
+/*
+ * File: LoginScreen.java
+ * Author: Marisol
+ * Project: EffortLogger-V2
+ * Class: CSE 360 - 
+ * Team:: Th21
+ */
+
 package effortLogger_V2;
 import java.io.FileInputStream;
 import java.util.Scanner;

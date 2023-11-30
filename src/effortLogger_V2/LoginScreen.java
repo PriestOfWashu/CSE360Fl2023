@@ -1,3 +1,11 @@
+/*
+ * File: LoginScreen.java
+ * Author: Timothy Gonzales
+ * Project: EffortLogger-V2
+ * Class: CSE 360 - 
+ * Team:: Th21
+ */
+
 package effortLogger_V2;
 
 import java.io.IOException;
@@ -28,11 +36,11 @@ public class LoginScreen {
 	@FXML
 	private Button LoginButton;
 
+	// containers for local login data
 	private String ID;
 	private String Pass;
 	private boolean Mgr;
 	private int loginFailCount = 0;
-	private static String dir = "C:\\Users\\Public\\EffortLogger\\usr\\";
 	// FXML handler for the Login button. Called when the login button is pressed.
 	public void Login() throws IOException
 	{
@@ -64,7 +72,6 @@ public class LoginScreen {
 			Pass = Password.getText();
 			Mgr = MgrLogin.isSelected();
 			// use the password to locate the users' log file.
-			// TODO: switch with ID number when file encryption is implemented.
 			String file = EffortLoggerLogin.masterDir + "\\usr\\" + ID + ".efl";
 			// attempt to load the log file.
 			try {
@@ -82,6 +89,7 @@ public class LoginScreen {
 					String in = infile.next();
 					String hold = decrypt.decrypt(in);
 					tmp.write(hold.getBytes());
+					// close the open file handlers
 					infile.close();
 					eflFile.close();
 					tmp.close();
@@ -119,17 +127,16 @@ public class LoginScreen {
 								Wlcm.setBottom(WlcmBtn);
 								BorderPane.setAlignment(Wlcm.bottomProperty().get(), Pos.CENTER);
 								Stage EffortLoggerStage = new Stage();
+								// determine whether an employee or a manager is loging in.
 								if(Mgr)
 								{
 									Wlcm.setCenter(new Text("Welcome Manager " + UsrTkn));
-									// TODO: Call ManagerEffortLogger
 									EffortLoggerLogin.mgr = true;
 									ManagerEffortLogger.start(EffortLoggerStage);
 								}
 								else
 								{
 									Wlcm.setCenter(new Text("Welcome User " + UsrTkn));
-									// TODO: Call EmployeeEffortLogger
 									EffortLoggerLogin.mgr = false;
 									EmployeeEffortLogger.start(EffortLoggerStage);
 								}
@@ -137,16 +144,17 @@ public class LoginScreen {
 								EffortLoggerLogin.setToken(UsrTkn);
 								Scene WlcmScene = new Scene(Wlcm);
 								Stage WlcmStage = new Stage();
+								// set the welcome message close button functionality
 								WlcmBtn.setOnAction(new EventHandler<ActionEvent>() {
 									@Override public void handle(ActionEvent e) {
 										WlcmStage.close();
 									}
 								});
 								WlcmStage.setScene(WlcmScene);
+								// display the welcome message.
 								WlcmStage.show();
 								// Close the login window.
 								EffortLoggerLogin.closeLogin();
-								// TODO: Release control to primary program.
 							}
 							else
 							{
@@ -172,6 +180,7 @@ public class LoginScreen {
 					errorflag = true;
 					ErrorMessage = "ID/Password Pair not Valid!";
 					loginFailCount++;
+					// ensure that any open file handler is closed
 					infile.close();
 					eflFile.close();
 					tmp.close();
@@ -216,16 +225,19 @@ public class LoginScreen {
 		}
 	}
 	
-	// not commented due to errors, will be commented once problems are fixed.
-	@SuppressWarnings("unused")
+	// when login attempts exceed a minimum amount, lock out 
 	private void lockout(String ID) throws IOException
 	{
-		String filename = dir + ID + ".efl";
+		// get the last attempted login id
+		String filename = EffortLoggerLogin.masterDir + ID + ".efl";
+		// create a file handler and check if the account exists
 		File chk = new File(filename);
 		if(chk.exists())
 		{
+			// alter the file so that it cannot be accessed
 			Path src = Paths.get(filename);
 			Files.move(src, src.resolveSibling(ID + "X.efl"));
+			// produce an error message informing the user of the lockout 
 			Button ErrOk = new Button("OK");
 			Label ErrLabel = new Label("LOCKOUT!");
 			ErrLabel.setStyle("-fx-font: normal bold 36px 'serif' ");
@@ -245,6 +257,7 @@ public class LoginScreen {
 			});
 			ErrStage.setScene(ErrScene);
 			ErrStage.show();
+			// revert the loginFailCount to 0
 			loginFailCount = 0;
 		}
 		return;
