@@ -1,4 +1,4 @@
-# CSE360Fl2023
+# CSE360Fall2023
 
 To Run:
 1. Either download and extract the zip file, or clone the repository. 
